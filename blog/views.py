@@ -48,6 +48,3 @@ class AddComment(generic.View):
 
 
 
-
-
-

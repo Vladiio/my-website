@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}test</title>
 
     <!-- Bootstrap -->
     {% load staticfiles %}
@@ -40,7 +40,7 @@
 
                     {% if username %}
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Logout ({{ username }})</a></li>
+                            <li><a href="{% url 'loginsys:logout' %}">Logout ({{ username }})</a></li>
                         </ul>
                     {% else %}
                     <form class="navbar-form navbar-right" action="{% url 'loginsys:login' %}" method="post">
@@ -62,10 +62,11 @@
         <div class="row">
             <div class="col-sm-9">
                 {% block content %}{% endblock %}
+                {% block login %}{% endblock %}
             </div>
             <div class="col-sm-3">
                 {% block navigation %}{% endblock %}
-                {% block login %}{% endblock %}
+
             </div>
         </div>
     </div>
