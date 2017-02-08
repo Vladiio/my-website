@@ -1,17 +1,24 @@
 {% extends 'blog/base.html' %}
 
 {% block login %}
-<div class="panel panel-default">
-    <div class="col-sm-offset-5 col-sm-6">
-            <form action="" method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group">
-                    {{ field.label_tag }}
-                    {{ field }}
-                </div>
-                {% endfor%}
-            </form>
+<div class="col-sm-offset-5 col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-group">
+                        {% if field.errors %}
+                            <span class="text-danger">{{ field.errors }}</span>
+                        {% endif %}
+                        <label class="col-sm-5">{{ field.label_tag }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor%}
+                    <input type="submit" value="Register" class="btn btn-primary btn-register">
+                </form>
+            </div>
+        </div>
     </div>
-</div>
+
 {% endblock %}

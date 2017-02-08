@@ -16,7 +16,7 @@
 
                 {% if object_list.has_previous %}
                     <li>
-                        <a href="{% url 'blog:paginator' object_list.previous_page_number %}"><span>&laquo</span></a>
+                        <a href="{% url 'blog:category-pag' category.id object_list.previous_page_number %}"><span>&laquo</span></a>
                     </li>
                 {% else %}
                     <li class="disabled">
@@ -26,17 +26,13 @@
 
 
                 {% for page in object_list.paginator.page_range %}
-                    {% if page == object_list.number %}
-                        <li class="active"><a href="{% url 'blog:paginator' page %}">{{ page }}</a></li>
-                    {% else %}
-                        <li><a href="{% url 'blog:paginator' page %}">{{ page }}</a></li>
-                    {% endif %}
+                    <li><a href="{% url 'blog:category-pag' category.id page %}">{{ page }}</a></li>
                 {% endfor%}
 
 
                 {% if object_list.has_next %}
                     <li>
-                        <a href="{% url 'blog:paginator' object_list.next_page_number %}"><span>&raquo</span></a>
+                        <a href="{% url 'blog:category-pag' category.id object_list.next_page_number %}"><span>&raquo</span></a>
                     </li>
                 {% else %}
                     <li class="disabled">

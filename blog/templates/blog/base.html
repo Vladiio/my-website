@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% endblock %}test</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap -->
     {% load staticfiles %}
@@ -35,7 +35,6 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{% url 'blog:index' %}">Home</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Register</a></li>
                     </ul>
 
                     {% if username %}
@@ -43,6 +42,9 @@
                             <li><a href="{% url 'loginsys:logout' %}">Logout ({{ username }})</a></li>
                         </ul>
                     {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'loginsys:register' %}">Register</a></li>
+                    </ul>
                     <form class="navbar-form navbar-right" action="{% url 'loginsys:login' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
@@ -51,6 +53,7 @@
                             <input type="submit" class="btn btn-primary" value="Sign in">
                         </div>
                     </form>
+
                     {% endif %}
 
                 </div>
@@ -64,7 +67,7 @@
                 {% block content %}{% endblock %}
                 {% block login %}{% endblock %}
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-offset-1 col-sm-2">
                 {% block navigation %}{% endblock %}
 
             </div>

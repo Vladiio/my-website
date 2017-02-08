@@ -2,3 +2,12 @@
     border-radius: 0;
     margin-bottom: 70px;
 }
+
+.btn-register {
+    float: right;
+}
+
+h3 {
+    position: relative;
+    left: 15px;
+}

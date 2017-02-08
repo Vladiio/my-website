@@ -22,10 +22,32 @@ class LoginView(generic.View):
 
 class UserFormView(generic.View):
     template_name = 'loginsys/register.html'
-    context = {'form': UserForm}
 
     def get(self, request):
-        return render(request, self.template_name, self.context)
+        form = UserForm(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+
+            user = form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+
+            user = auth.authenticate(username=username, password=password)
+
+            if user is not None:
+
+                if user.is_active:
+
+                    auth.login(request, user)
+                    return redirect('blog:index')
+
+        return render(request, self.template_name, {'form': form} )
 
 
 
